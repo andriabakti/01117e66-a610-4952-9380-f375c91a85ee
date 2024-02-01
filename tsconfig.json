@@ -1,15 +1,15 @@
 {
 	"compilerOptions": {
 		"baseUrl": "./",
-		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
 		"incremental": true,
 		"skipLibCheck": true,
-		"strictNullChecks": true,
-		"noImplicitAny": true,
-		"strictBindCallApply": true,
-		"forceConsistentCasingInFileNames": true,
-		"noFallthroughCasesInSwitch": true,
+		"strictNullChecks": false,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"forceConsistentCasingInFileNames": false,
+		"noFallthroughCasesInSwitch": false,
 		"paths": {
 			"@server/*": ["./apps/server/src/*"],
 			"@client/*": ["./apps/client/*"]

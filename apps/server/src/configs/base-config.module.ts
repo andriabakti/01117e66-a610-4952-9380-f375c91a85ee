@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
-import { ThrottlerModule, minutes } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule, minutes } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -24,3 +25,8 @@ import { ThrottlerModule, minutes } from '@nestjs/throttler';
   ],
 })
 export class BaseConfigModule {}
+
+export const ThrottlerProvider = {
+  provide: APP_GUARD,
+  useClass: ThrottlerGuard,
+};

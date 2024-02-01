@@ -1,0 +1,15 @@
+{
+  "name": "link-shortener-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "dev:server": "pnpm run --filter=server dev",
+    "dev:client": "pnpm run --filter=client dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andria Bakti Mahendra",
+  "license": "ISC"
+}

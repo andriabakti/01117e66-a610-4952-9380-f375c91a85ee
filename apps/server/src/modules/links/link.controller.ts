@@ -1,3 +1,5 @@
+import { UserData } from '@/server/commons/decorators/user-data.decorator';
+import { IntParserPipe } from '@/server/commons/pipes/int-parser.pipe';
 import {
   BadRequestException,
   Body,
@@ -6,8 +8,6 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { UserData } from '@server/commons/decorators/user-data.decorator';
-import { IntParserPipe } from '@server/commons/pipes/int-parser.pipe';
 import { isURL } from 'class-validator';
 import { UrlShortenerDto } from './dto/url-shortener.dto';
 import { LinkService } from './link.service';

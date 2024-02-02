@@ -1,3 +1,4 @@
+import { UserService } from '@/server/modules/users/user.service';
 import {
   BadRequestException,
   Injectable,
@@ -6,7 +7,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '@server/modules/users/user.service';
 import { NextFunction, Request, Response } from 'express';
 
 @Injectable()

@@ -1,10 +1,10 @@
+import { DatabaseService } from '@/server/configs/database/database.service';
+import { RedisService } from '@/server/configs/redis/redis.service';
 import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { DatabaseService } from '@server/configs/database/database.service';
-import { RedisService } from '@server/configs/redis/redis.service';
 import { nanoid } from 'nanoid';
 import { ICachedUrl } from './interfaces/cached-url.interface';
 

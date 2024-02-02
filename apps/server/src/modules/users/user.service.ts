@@ -1,10 +1,10 @@
+import { DatabaseService } from '@/server/configs/database/database.service';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { DatabaseService } from '@server/configs/database/database.service';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisDto } from './dto/user-regis.dto';

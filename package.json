@@ -4,10 +4,9 @@
   "description": "",
   "main": "",
   "scripts": {
-    "dev": "pnpm run --parallel dev",
-    "dev:server": "pnpm run --filter=server dev",
     "dev:client": "pnpm run --filter=client dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "pnpm run --filter=server start:dev",
+    "migrate:init": "pnpm run --filter=server migrate:init"
   },
   "keywords": [],
   "author": "Andria Bakti Mahendra",

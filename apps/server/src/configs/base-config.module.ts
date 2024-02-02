@@ -26,6 +26,7 @@ import { ThrottlerGuard, ThrottlerModule, minutes } from '@nestjs/throttler';
 })
 export class BaseConfigModule {}
 
+// provider -> throttler
 export const ThrottlerProvider = {
   provide: APP_GUARD,
   useClass: ThrottlerGuard,

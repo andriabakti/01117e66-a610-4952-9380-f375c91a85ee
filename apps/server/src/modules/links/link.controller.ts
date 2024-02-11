@@ -33,8 +33,8 @@ export class LinkController {
   @Get('list')
   public async list(
     @UserData() requester: { id: string },
-    @Query('limit', new IntParserPipe()) limit: number,
-    @Query('skip', new IntParserPipe()) skip: number,
+    @Query('limit', new IntParserPipe()) limit?: number,
+    @Query('skip', new IntParserPipe()) skip?: number,
   ) {
     return await this.linkSvc.getLinkList(requester.id, limit, skip);
   }

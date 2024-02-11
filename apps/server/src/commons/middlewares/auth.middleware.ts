@@ -1,6 +1,5 @@
 import { UserService } from '@/server/modules/users/user.service';
 import {
-  BadRequestException,
   Injectable,
   NestMiddleware,
   NotFoundException,
@@ -19,7 +18,7 @@ export class AuthMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     const reqAuth: string = req.headers?.authorization;
     if (!reqAuth) {
-      throw new BadRequestException('Token is Required!');
+      throw new UnauthorizedException('Token is Required!');
     } else {
       const tokenArr = reqAuth.split(' ');
       if (tokenArr[0] != 'Bearer' || tokenArr.length < 2) {

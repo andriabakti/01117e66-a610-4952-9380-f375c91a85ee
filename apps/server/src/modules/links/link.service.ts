@@ -123,28 +123,42 @@ export class LinkService {
     }
   }
 
-  public async getLinkList(userId: string, limit: number, offset: number) {
+  public async getLinkList(userId: string, limit?: number, offset?: number) {
     const links = await this.db.link.findMany({
       where: {
         userId: userId,
       },
-      take: limit ? limit : 10,
+      take: limit ? limit : 5,
       skip: offset ? offset : 0,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
       select: {
+        id: true,
+        shortUrl: true,
+        longUrl: true,
+        visitCount: true,
         userId: false,
+        createdAt: true,
       },
     });
 
-    // get total
-    const total = await this.db.link.count({
+    const total = await this.db.link.aggregate({
       where: {
         userId: userId,
       },
+      _sum: {
+        visitCount: true,
+      },
+      _count: {
+        userId: true,
+      },
     });
 
-    return { links, count: links.length, total };
+    return {
+      links,
+      totalLink: total._count.userId,
+      totalVisit: total._sum.visitCount,
+    };
   }
 }

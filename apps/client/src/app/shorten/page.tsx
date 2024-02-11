@@ -46,7 +46,7 @@ export default function ShortenPage() {
     if (!response?.error) {
       setList({
         links: response.result.links,
-        totalLink: response.result.count,
+        totalLink: response.result.totalLink,
         totalVisit: response.result.totalVisit,
       });
     } else {

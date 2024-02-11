@@ -1,10 +1,13 @@
+"use client";
+
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import RegisForm from "../../components/user-regis.form";
+import isProtected from "../../components/protected.page";
+import RegisForm from "../../components/users/user-regis.form";
 
-export default function RegisPage() {
+function RegisPage() {
   return (
-    <div className={`flex h-screen items-center justify-center bg-sky-500`}>
+    <div className={`flex h-screen items-center justify-center bg-sky-300`}>
       <div className="md:w-[500px]">
         <div className="relative flex flex-col items-center justify-center rounded-t-xl bg-blue-700 py-5">
           <Link
@@ -20,3 +23,5 @@ export default function RegisPage() {
     </div>
   );
 }
+
+export default isProtected(RegisPage);

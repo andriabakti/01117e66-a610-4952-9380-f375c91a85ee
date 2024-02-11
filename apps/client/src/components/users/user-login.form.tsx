@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import userService from "../services/user.service";
+import userService from "../../services/user.service";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -29,6 +29,10 @@ export default function LoginForm() {
   const [isLoading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const togglePassword = () => {
+    setShowPassword(showPassword ? false : true);
+  };
+
   const {
     register,
     handleSubmit,
@@ -39,28 +43,24 @@ export default function LoginForm() {
     resolver: yupResolver(loginSchema),
   });
 
-  const togglePassword = () => {
-    setShowPassword(showPassword ? false : true);
-  };
-
   const handleLogin = async (values: LoginFields) => {
     setLoading(true);
     const response = await userService.login(values);
+    console.log(response, "< response here");
     if (!response.error) {
-      toast("Login success!", { type: "success" });
-      localStorage.setItem("token", response.result.accessToken);
       setLoading(false);
+      localStorage.setItem("token", response.result.accessToken);
       reset();
       router.push("/shorten");
     } else {
-      toast(response.message, { type: "error" });
       setLoading(false);
+      toast.error(response.message);
       reset();
     }
   };
 
   return (
-    <div className="flex flex-col rounded-b-xl bg-gray-100 px-5 py-10">
+    <div className="flex flex-col rounded-b-xl  bg-gray-100 px-5 py-10">
       <form
         className="flex flex-col justify-between px-5 text-left"
         onSubmit={handleSubmit((data: LoginFields) => handleLogin(data))}

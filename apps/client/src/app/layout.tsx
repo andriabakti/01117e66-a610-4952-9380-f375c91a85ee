@@ -18,14 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={inter.className}>
         <ToastContainer
           position="top-right"
-          autoClose={5000}
+          autoClose={2000}
           hideProgressBar={false}
           pauseOnFocusLoss
           pauseOnHover
@@ -33,6 +33,7 @@ export default function RootLayout({
           newestOnTop
           draggable
           rtl={false}
+          theme="colored"
         />
         <Suspense fallback={null}>
           <ClientProgress>{children}</ClientProgress>

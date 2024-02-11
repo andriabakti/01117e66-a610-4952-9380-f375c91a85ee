@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import userService from "../services/user.service";
+import userService from "../../services/user.service";
 
 const regisSchema = yup.object({
   username: yup
@@ -51,14 +51,14 @@ export default function RegisForm() {
     setLoading(true);
     const response = await userService.regis(values);
     if (!response.error) {
-      toast("Registration success!", { type: "success" });
-      localStorage.setItem("token", response.result.accessToken);
       setLoading(false);
+      toast.success("Registration success!");
+      localStorage.setItem("token", response.result.accessToken);
       reset();
       router.push("/shorten");
     } else {
-      toast(response.message, { type: "error" });
       setLoading(false);
+      toast.error(response.message);
       reset();
     }
   };

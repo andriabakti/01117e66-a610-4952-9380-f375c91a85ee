@@ -1,10 +1,13 @@
+"use client";
+
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import LoginForm from "../../components/user-login.form";
+import isProtected from "../../components/protected.page";
+import LoginForm from "../../components/users/user-login.form";
 
-export default function LoginPage() {
+function LoginPage() {
   return (
-    <div className={`flex h-screen items-center justify-center bg-sky-500`}>
+    <div className={`flex h-screen items-center justify-center bg-sky-300`}>
       <div className="md:w-[500px]">
         <div className="relative flex flex-col items-center justify-center rounded-t-xl bg-blue-700 py-5">
           <Link
@@ -20,3 +23,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+export default isProtected(LoginPage);

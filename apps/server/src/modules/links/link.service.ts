@@ -109,7 +109,7 @@ export class LinkService {
       });
 
       const isCached = await this.findInRedis(urlCode);
-      if (!isCached && updateResult.visitCount >= 5) {
+      if (!isCached && updateResult.visitCount >= 3) {
         await this.saveInRedis(urlCode, updateResult.longUrl);
       }
 

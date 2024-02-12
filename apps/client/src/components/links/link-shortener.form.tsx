@@ -94,6 +94,7 @@ export default function LikShortenerForm({ isLogin, handleList }: Props) {
               copy.length ? copy : "Your shortened link will be shown here"
             }
             disabled
+            value={copy}
           />
           <CopyToClipboard text={copy}>
             <button
@@ -116,7 +117,7 @@ export default function LikShortenerForm({ isLogin, handleList }: Props) {
       </div>
       <div className="mt-5 flex w-[50%] flex-col items-center">
         <button
-          className="btn btn-wide mt-5 bg-blue-500 text-xl text-white hover:bg-blue-500  disabled:font-bold disabled:text-white"
+          className="btn btn-wide mt-5 bg-blue-500 text-xl text-white  hover:bg-blue-700 disabled:font-bold disabled:text-white"
           onClick={handleSubmit((data: ShortenField) => handleShorten(data))}
           disabled={!isLogin || !isDirty || !isValid || isLoading}
         >

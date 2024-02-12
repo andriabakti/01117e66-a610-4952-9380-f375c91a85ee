@@ -1,7 +1,4 @@
-"use client";
-
 import axios, { InternalAxiosRequestConfig } from "axios";
-import { toast } from "react-toastify";
 
 const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_API,
@@ -10,7 +7,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     Object.assign(config.headers, {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
     });
     return config;
   },
@@ -33,10 +30,9 @@ httpClient.interceptors.response.use(
       });
       return Promise.reject(err);
     }
-    if (err.response.status === 403) {
-      toast.warning("Your token is expired. Please login again!");
+    if (err.response.status === 401) {
       localStorage.clear();
-      window.location.href = "/sign-in";
+      window.location.replace("/sign-in");
     }
     return Promise.reject(err.response.data);
   },

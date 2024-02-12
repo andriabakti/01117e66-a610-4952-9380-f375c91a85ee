@@ -55,7 +55,7 @@ export default function ShortenPage() {
   }, [page]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
     if (token) {
       setIsLogin(true);
       handleList();

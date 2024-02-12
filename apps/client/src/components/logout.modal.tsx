@@ -46,11 +46,10 @@ export default function LogoutModal({
       onClick={() => setModalOpen(false)}
       onKeyDown={(e: KeyboardEvent) => handleEsc(e)}
     >
-      <div className="h modal-box w-[30%]">
+      <div className="modal-box overflow-x-hidden md:w-[40%] lg:w-[30%]">
         <h3 className="pb-10 text-center text-xl font-bold">
           Are you sure want to logout?
         </h3>
-        {/* <p className="py-4 te"></p> */}
         <form
           method="dialog"
           className="modal-backdrop flex justify-evenly text-blue-700"

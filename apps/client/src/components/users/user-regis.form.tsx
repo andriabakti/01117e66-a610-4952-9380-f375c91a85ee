@@ -53,7 +53,7 @@ export default function RegisForm() {
     if (!response.error) {
       setLoading(false);
       toast.success("Registration success!");
-      localStorage.setItem("token", response.result.accessToken);
+      localStorage.setItem("access_token", response.result.accessToken);
       reset();
       router.push("/shorten");
     } else {

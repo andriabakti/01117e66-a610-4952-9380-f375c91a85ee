@@ -56,9 +56,9 @@ export default function LinkList({
   };
 
   return (
-    <div className="h-[calc(100%-80px)] w-full">
-      <div className="container mb-20 mt-10 h-auto overflow-x-hidden rounded-lg rounded-b-lg bg-white">
-        <div className="bg-blue-500 py-5 text-center text-xl font-bold text-white">
+    <div className="container mb-20 ">
+      <div className="mt-10 h-auto overflow-x-auto rounded-lg bg-white">
+        <div className="w-full bg-blue-500 py-5 text-center text-xl font-bold text-white">
           List of Shortened Link
         </div>
         <table className="table">
@@ -118,37 +118,37 @@ export default function LinkList({
             </tbody>
           )}
         </table>
-        {isLogin && (
-          <div className="m-5 flex items-center justify-between">
-            <div className="font-bold text-blue-500">
-              Showing {page.startIndex} to {page.lastIndex} of {listCount}
-            </div>
-            <div>
-              <div className="join">
-                <button
-                  className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
-                  onClick={() => changePageDown()}
-                  disabled={page.current === 1}
-                >
-                  {"<"}
-                </button>
-                <button className="btn join-item bg-gray-200 text-blue-700 hover:cursor-default hover:border-gray-200 hover:bg-gray-200 ">
-                  Page {page.current}
-                </button>
-                <button
-                  className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
-                  onClick={() => changePageUp()}
-                  disabled={
-                    page.current === page.lastPage || page.current === null
-                  }
-                >
-                  {">"}
-                </button>
-              </div>
+      </div>
+      {isLogin && (
+        <div className="flex items-center justify-between rounded-b-lg bg-white p-5 ">
+          <div className="font-bold text-blue-500">
+            Showing {page.startIndex} to {page.lastIndex} of {listCount}
+          </div>
+          <div>
+            <div className="join">
+              <button
+                className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
+                onClick={() => changePageDown()}
+                disabled={page.current === 1}
+              >
+                {"<"}
+              </button>
+              <button className="btn join-item  bg-gray-200 text-blue-700 hover:cursor-default hover:bg-gray-200 ">
+                Page {page.current}
+              </button>
+              <button
+                className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
+                onClick={() => changePageUp()}
+                disabled={
+                  page.current === page.lastPage || page.current === null
+                }
+              >
+                {">"}
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

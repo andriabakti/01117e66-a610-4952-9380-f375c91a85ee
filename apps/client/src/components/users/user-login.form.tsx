@@ -46,10 +46,9 @@ export default function LoginForm() {
   const handleLogin = async (values: LoginFields) => {
     setLoading(true);
     const response = await userService.login(values);
-    console.log(response, "< response here");
     if (!response.error) {
       setLoading(false);
-      localStorage.setItem("token", response.result.accessToken);
+      localStorage.setItem("access_token", response.result.accessToken);
       reset();
       router.push("/shorten");
     } else {

@@ -1,6 +1,6 @@
 <h1 align="center">Link Shortener App</h1>
 
-This application is build with <b>[NestJS](https://nestjs.com/)</b> as the backend and <b>[NextJS](https://nextjs.org/)</b> as the frontend that based on <b>[TypeScript](https://www.typescriptlang.org/)</b>
+This application is build with <b>[NestJS](https://nestjs.com/)</b> as the backend and <b>[Next.js](https://nextjs.org/)</b> as the frontend that based on <b>[TypeScript](https://www.typescriptlang.org/)</b>
 
 ## API Documentation
 

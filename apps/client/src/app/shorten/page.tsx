@@ -34,7 +34,7 @@ export default function ShortenPage() {
     limit: 5,
     skip: 0,
     current: 1,
-    lastPage: 1,
+    lastPage: 0,
   });
 
   const handleList = useCallback(async () => {

@@ -29,10 +29,13 @@ export class AuthMiddleware implements NestMiddleware {
       try {
         decoded = await this.jwtSvc.verifyAsync(tokenArr[1]);
       } catch (err) {
-        const errMsg =
-          err.message == 'TokenExpiredError'
-            ? 'Token is Expired!'
-            : err.message;
+        const errMsg = [
+          'TokenExpiredError',
+          'jwt malformed',
+          'jwt expired',
+        ].includes(err.message)
+          ? 'Token is Expired!'
+          : err.message;
         throw new UnauthorizedException(errMsg);
       }
 

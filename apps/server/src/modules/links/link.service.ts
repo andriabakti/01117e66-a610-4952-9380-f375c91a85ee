@@ -118,7 +118,6 @@ export class LinkService {
         visitCount: updateResult.visitCount,
       };
     } catch (err: any) {
-      console.log(err, `< error update link: ${urlCode} visit count`);
       throw new InternalServerErrorException(err.message);
     }
   }

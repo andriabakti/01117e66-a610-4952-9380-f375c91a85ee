@@ -13,16 +13,26 @@ export class ErrorExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const errData: any = exception.getResponse();
+    const statusCode = exception.getStatus();
+
+    if (statusCode === 429) {
+      return response.status(HttpStatus.TOO_MANY_REQUESTS).json({
+        statusCode: statusCode,
+        error: errData,
+        message: errData.split(':')[1],
+        result: null,
+      });
+    }
 
     if (typeof errData == 'object') {
-      response.status(errData.statusCode).json({
-        statusCode: errData.statusCode,
+      return response.status(errData.statusCode).json({
+        statusCode: statusCode,
         error: errData.error,
         message: errData.message,
         result: null,
       });
     } else {
-      response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
         error: 'Internal Server Error',
         message: errData,

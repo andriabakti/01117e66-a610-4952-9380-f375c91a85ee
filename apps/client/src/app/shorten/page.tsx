@@ -20,8 +20,6 @@ export type IListPage = {
   skip: number;
   current: number;
   lastPage: number;
-  startIndex: number;
-  lastIndex: number;
 };
 
 export default function ShortenPage() {
@@ -36,9 +34,7 @@ export default function ShortenPage() {
     limit: 5,
     skip: 0,
     current: 1,
-    lastPage: 0,
-    startIndex: 1,
-    lastIndex: 5,
+    lastPage: 1,
   });
 
   const handleList = useCallback(async () => {

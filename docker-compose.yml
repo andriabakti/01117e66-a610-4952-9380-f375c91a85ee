@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: andria-postgre
+    env_file: ./apps/server/.env
+    restart: always
+    networks:
+      - andria-networks
+
+  redis:
+    image: redis:latest
+    container_name: andria-redis
+    command: redis-server
+    env_file: ./apps/server/.env
+    networks:
+      - andria-networks
+
+  server:
+    build:
+      context: ./apps/server
+    container_name: app-server
+    ports:
+      - 3939:3939
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - andria-networks
+
+  client:
+    build:
+      context: ./apps/client
+    container_name: app-client
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+    networks:
+      - andria-networks
+
+networks:
+  andria-networks:

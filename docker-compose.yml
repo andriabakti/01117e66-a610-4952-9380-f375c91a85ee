@@ -20,7 +20,7 @@ services:
   server:
     build:
       context: ./apps/server
-    container_name: app-server
+    container_name: link-shortener-server
     ports:
       - 3939:3939
     depends_on:
@@ -32,7 +32,7 @@ services:
   client:
     build:
       context: ./apps/client
-    container_name: app-client
+    container_name: link-shortener-client
     ports:
       - 3000:3000
     depends_on:

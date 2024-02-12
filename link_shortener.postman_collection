@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "cd964984-5b85-47b6-8713-18a464aaf204",
+		"name": "Link Shortener",
+		"description": "Simple API documentation for Link Shortener App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12273027"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"pm.environment.set(\"ACCESS_TOKEN\", res.result.accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Aki Rosenthal\",\r\n    \"password\": \"aki123\",\r\n    \"email\": \"aki.rose@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/sign-up",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"sign-up"
+							]
+						},
+						"description": "This endpoint is used for create new user"
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"pm.environment.set(\"ACCESS_TOKEN\", res.result.accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yozora.mel@gmail.com\",\r\n    \"password\": \"mel123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/sign-in",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"sign-in"
+							]
+						},
+						"description": "This endpoint is used for user login to get access token as authorization"
+					},
+					"response": []
+				}
+			],
+			"description": "This section is related to user module"
+		},
+		{
+			"name": "Link",
+			"item": [
+				{
+					"name": "Shorten Link",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"originalUrl\": \"https://roogrhizwzxnbxecfeyf.supabase.co/storage/v1/object/public/job-portal/career/challenge/1702398015902-Full%20Time%20Full%20Stack%20Engineer%20Challenge.pdf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/links/shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"links",
+								"shorten"
+							]
+						},
+						"description": "This endpoint is used for shortening long URL"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Link List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/links/list?limit=5&skip=0",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"links",
+								"list"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "This endpoint is used for to get list of user's shortened links"
+					},
+					"response": []
+				},
+				{
+					"name": "Redirect Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/:code",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "Jgkf1o"
+								}
+							]
+						},
+						"description": "This endpoint is used for redirecting shortened URL to the originial one"
+					},
+					"response": []
+				}
+			],
+			"description": "This section is related to link module"
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
+		}
+	]
+}

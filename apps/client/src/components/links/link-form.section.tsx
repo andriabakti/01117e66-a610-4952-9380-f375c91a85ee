@@ -5,13 +5,13 @@ import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { Tooltip } from "react-tooltip";
 import * as yup from "yup";
 import linkService from "../../services/link.service";
-import { Tooltip } from "react-tooltip";
 
 type Props = {
-  isLogin: boolean;
-  handleList: Function;
+  isAuth: boolean;
+  setList: Function;
 };
 
 const shortenSchema = yup.object({
@@ -20,7 +20,7 @@ const shortenSchema = yup.object({
 
 export type ShortenField = yup.InferType<typeof shortenSchema>;
 
-export default function LikShortenerForm({ isLogin, handleList }: Props) {
+export default function LinkForm({ isAuth, setList }: Props) {
   const [isLoading, setLoading] = useState(false);
   const [copy, setCopy] = useState("");
   const {
@@ -42,19 +42,19 @@ export default function LikShortenerForm({ isLogin, handleList }: Props) {
     if (!response.error) {
       setCopy(response.result.shortUrl);
       setLoading(false);
-      handleList();
+      setList();
     } else {
       toast.error(response.message);
       setLoading(false);
       resetField("originalUrl");
     }
-    handleList();
+    setList();
   };
 
   return (
     <div className="flex flex-col items-center justify-center bg-white py-10">
       <div className="w-[50%]">
-        {!isLogin ? (
+        {!isAuth ? (
           <p className="mb-5 text-center text-2xl font-bold text-gray-700">
             Please <span className="text-blue-500">Sign In</span> to Shorten
             Your Link
@@ -70,7 +70,7 @@ export default function LikShortenerForm({ isLogin, handleList }: Props) {
             type="text"
             className="input input-bordered input-md w-full border-4 border-solid border-slate-300 bg-gray-200 font-medium text-black placeholder-gray-400 hover:border-blue-500 focus:border-solid focus:border-blue-500 focus:outline-none disabled:cursor-default"
             placeholder="Paste your link here"
-            disabled={!isLogin}
+            disabled={!isAuth}
           />
           <button
             type="button"
@@ -119,7 +119,7 @@ export default function LikShortenerForm({ isLogin, handleList }: Props) {
         <button
           className="btn btn-wide mt-5 bg-blue-500 text-xl text-white  hover:bg-blue-700 disabled:font-bold disabled:text-white"
           onClick={handleSubmit((data: ShortenField) => handleShorten(data))}
-          disabled={!isLogin || !isDirty || !isValid || isLoading}
+          disabled={!isAuth || !isDirty || !isValid || isLoading}
         >
           {isLoading ? (
             <span className="loading loading-spinner loading-sm"></span>

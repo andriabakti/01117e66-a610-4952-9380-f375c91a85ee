@@ -9,33 +9,29 @@ import {
 } from "react";
 
 type Props = {
-  showModal: boolean;
-  setLogin: Dispatch<SetStateAction<boolean>>;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setAuth: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function LogoutModal({
-  showModal,
-  setLogin,
-  setModalOpen,
-}: Props) {
+export default function LogoutModal({ isOpen, setOpen, setAuth }: Props) {
   const modalRef = useRef(null);
 
   useLayoutEffect(() => {
     if (!modalRef.current) return null;
-    showModal ? modalRef.current.showModal() : modalRef.current.close();
-  }, [showModal]);
+    isOpen ? modalRef.current.showModal() : modalRef.current.close();
+  }, [isOpen]);
 
   const handleEsc = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       e.preventDefault();
-      setModalOpen(false);
+      setOpen(false);
     }
   };
 
   const confirmLogout = () => {
     localStorage.removeItem("access_token");
-    return setLogin(false);
+    return setAuth(false);
   };
 
   return (
@@ -43,7 +39,7 @@ export default function LogoutModal({
       ref={modalRef}
       id="logout_modal"
       className="modal"
-      onClick={() => setModalOpen(false)}
+      onClick={() => setOpen(false)}
       onKeyDown={(e: KeyboardEvent) => handleEsc(e)}
     >
       <div className="modal-box overflow-x-hidden md:w-[40%] lg:w-[30%]">
@@ -56,7 +52,7 @@ export default function LogoutModal({
         >
           <button
             className="btn right-0 w-40 border-2 border-red-500 bg-red-500 font-bold text-white hover:border-gray-700 hover:bg-gray-700 disabled:font-bold disabled:text-white"
-            onClick={() => setModalOpen(false)}
+            onClick={() => setOpen(false)}
           >
             Cancel
           </button>

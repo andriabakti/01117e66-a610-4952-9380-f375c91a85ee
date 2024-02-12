@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
-  isLogin: boolean;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
+  isAuth: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function Navbar({ isLogin, setShowModal }: Props) {
+export default function BaseNavbar({ isAuth, setOpen }: Props) {
   return (
     <div className="navbar sticky top-0 z-10 h-[80px] bg-blue-500">
       <div className="navbar-start">
@@ -17,7 +17,7 @@ export default function Navbar({ isLogin, setShowModal }: Props) {
         </a>
       </div>
       <div className="navbar-end mr-5">
-        {!isLogin ? (
+        {!isAuth ? (
           <div>
             <Link
               href="/sign-up"
@@ -36,7 +36,7 @@ export default function Navbar({ isLogin, setShowModal }: Props) {
           <button
             type="button"
             className="btn ml-5 rounded-lg border-none bg-white text-lg font-bold text-blue-500 hover:bg-gray-700 hover:text-white"
-            onClick={() => setShowModal(true)}
+            onClick={() => setOpen(true)}
           >
             Sign Out
           </button>

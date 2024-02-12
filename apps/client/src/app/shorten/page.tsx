@@ -2,20 +2,20 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import LikShortenerForm from "../../components/links/link-shortener.form";
-import LinkList, { LinkField } from "../../components/links/link-list";
-import LinkStats from "../../components/links/link.stats";
-import LogoutModal from "../../components/logout.modal";
-import Navbar from "../../components/navbar";
+import BaseNavbar from "../../components/commons/base-navbar";
+import LinkForm from "../../components/links/link-form.section";
+import LinkList, { ILinkField } from "../../components/links/link-list.section";
+import LinkStats from "../../components/links/link-stats.section";
+import LogoutModal from "../../components/users/user-logout.modal";
 import linkService from "../../services/link.service";
 
-export type LinkList = {
-  links: Array<LinkField>;
+export type ILinkList = {
+  links: Array<ILinkField>;
   totalLink: number;
   totalVisit: number;
 };
 
-export type LinkPageInfo = {
+export type IListPage = {
   limit: number;
   skip: number;
   current: number;
@@ -25,14 +25,14 @@ export type LinkPageInfo = {
 };
 
 export default function ShortenPage() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [list, setList] = useState<LinkList>({
+  const [isLogin, setLogin] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [list, setList] = useState<ILinkList>({
     links: [],
     totalLink: 0,
     totalVisit: 0,
   });
-  const [page, setPage] = useState<LinkPageInfo>({
+  const [page, setPage] = useState<IListPage>({
     limit: 5,
     skip: 0,
     current: 1,
@@ -57,28 +57,24 @@ export default function ShortenPage() {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
-      setIsLogin(true);
+      setLogin(true);
       handleList();
     }
   }, [handleList]);
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-100">
-      <Navbar isLogin={isLogin} setShowModal={setModalOpen} />
-      <LikShortenerForm isLogin={isLogin} handleList={handleList} />
+      <BaseNavbar isAuth={isLogin} setOpen={setModal} />
+      <LinkForm isAuth={isLogin} setList={handleList} />
       <LinkStats totalLink={list.totalLink} totalVisit={list.totalVisit} />
       <LinkList
-        isLogin={isLogin}
-        links={list.links}
-        page={page}
-        listCount={list.totalLink}
-        pageHandler={setPage}
+        isAuth={isLogin}
+        totalLink={list.totalLink}
+        listLink={list.links}
+        listPage={page}
+        setPageInfo={setPage}
       />
-      <LogoutModal
-        showModal={isModalOpen}
-        setModalOpen={setModalOpen}
-        setLogin={setIsLogin}
-      />
+      <LogoutModal isOpen={modal} setOpen={setModal} setAuth={setLogin} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import httpClient from "../commons/http-client";
-import { ShortenField } from "../components/links/link-shortener.form";
+import httpClient from "./base.service";
+import { ShortenField } from "../components/links/link-form.section";
 
 const SHORTEN_URL = "/links/shorten";
 const LIST_URL = "/links/list";

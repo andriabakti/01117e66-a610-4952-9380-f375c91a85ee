@@ -1,4 +1,4 @@
-import httpClient from "../commons/http-client";
+import httpClient from "./base.service";
 import { LoginFields } from "../components/users/user-login.form";
 import { RegisFields } from "../components/users/user-regis.form";
 

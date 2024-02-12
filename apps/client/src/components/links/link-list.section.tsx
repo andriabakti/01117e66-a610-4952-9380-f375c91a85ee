@@ -1,10 +1,12 @@
+"use client";
+
+import { IListPage } from "@/app/shorten/page";
 import { format } from "date-fns";
 import { Dispatch, SetStateAction } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Tooltip } from "react-tooltip";
-import { LinkPageInfo } from "../../app/shorten/page";
 
-export type LinkField = {
+export type ILinkField = {
   id: string;
   shortUrl: string;
   longUrl: string;
@@ -13,44 +15,44 @@ export type LinkField = {
 };
 
 type Props = {
-  links: Array<LinkField>;
-  isLogin: boolean;
-  listCount: number;
-  page: LinkPageInfo;
-  pageHandler: Dispatch<SetStateAction<any>>;
+  isAuth: boolean;
+  totalLink: number;
+  listLink: Array<ILinkField>;
+  listPage: IListPage;
+  setPageInfo: Dispatch<SetStateAction<IListPage>>;
 };
 
 export default function LinkList({
-  links,
-  isLogin,
-  listCount,
-  page,
-  pageHandler,
+  isAuth,
+  totalLink,
+  listLink,
+  listPage,
+  setPageInfo,
 }: Props) {
   const changePageUp = () => {
     const lastIndex =
-      page.lastIndex + 5 < listCount ? page.lastIndex + 5 : listCount;
-    pageHandler({
-      limit: page.limit,
-      skip: page.skip + 5,
-      current: page.current + 1,
-      lastPage: Math.ceil(listCount / 5),
-      startIndex: page.startIndex + 5,
+      listPage.lastIndex + 5 < totalLink ? listPage.lastIndex + 5 : totalLink;
+    setPageInfo({
+      limit: listPage.limit,
+      skip: listPage.skip + 5,
+      current: listPage.current + 1,
+      lastPage: Math.ceil(totalLink / 5),
+      startIndex: listPage.startIndex + 5,
       lastIndex: lastIndex,
     });
   };
 
   const changePageDown = () => {
     const lastIndex =
-      page.startIndex - 5 < page.lastIndex
-        ? page.startIndex - 1
-        : page.startIndex - 5;
-    pageHandler({
-      limit: page.limit,
-      skip: page.skip - 5,
-      current: page.current - 1,
-      lastPage: Math.ceil(listCount / 5),
-      startIndex: page.startIndex - 5,
+      listPage.startIndex - 5 < listPage.lastIndex
+        ? listPage.startIndex - 1
+        : listPage.startIndex - 5;
+    setPageInfo({
+      limit: listPage.limit,
+      skip: listPage.skip - 5,
+      current: listPage.current - 1,
+      lastPage: Math.ceil(totalLink / 5),
+      startIndex: listPage.startIndex - 5,
       lastIndex: lastIndex,
     });
   };
@@ -70,8 +72,8 @@ export default function LinkList({
               <th>Visit Count</th>
             </tr>
           </thead>
-          {links.length ? (
-            links.map((el: any, i: number) => (
+          {listLink.length ? (
+            listLink.map((el: any, i: number) => (
               <tbody key={el.id}>
                 <tr className="hover:bg-blue-200">
                   <td>{format(el.createdAt, "yyyy MMM dd HH:mm")}</td>
@@ -105,7 +107,7 @@ export default function LinkList({
                   className="h-60 bg-gray-200 text-center text-2xl font-bold"
                   colSpan={8}
                 >
-                  {!isLogin ? (
+                  {!isAuth ? (
                     <>
                       <span className="text-blue-500">Sign In</span> to See This
                       Section
@@ -119,29 +121,30 @@ export default function LinkList({
           )}
         </table>
       </div>
-      {isLogin && listCount !== 0 && (
+      {isAuth && totalLink !== 0 && (
         <div className="flex items-center justify-between rounded-b-lg bg-white p-5 ">
           <div className="font-bold text-blue-500">
-            Showing {page.startIndex} to {page.lastIndex} of {listCount}
+            Showing {listPage.startIndex} to {listPage.lastIndex} of {totalLink}
           </div>
-          {listCount > 5 && (
+          {totalLink > 5 && (
             <div>
               <div className="join">
                 <button
                   className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
                   onClick={() => changePageDown()}
-                  disabled={page.current === 1}
+                  disabled={listPage.current === 1}
                 >
                   {"<"}
                 </button>
                 <button className="btn join-item  bg-gray-200 text-blue-700 hover:cursor-default hover:bg-gray-200 ">
-                  Page {page.current}
+                  Page {listPage.current}
                 </button>
                 <button
                   className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
                   onClick={() => changePageUp()}
                   disabled={
-                    page.current === page.lastPage || page.current === null
+                    listPage.current === listPage.lastPage ||
+                    listPage.current === null
                   }
                 >
                   {">"}

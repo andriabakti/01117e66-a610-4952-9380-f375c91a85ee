@@ -2,7 +2,7 @@
 
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import isProtected from "../../components/protected.page";
+import isProtected from "../../components/commons/protected-page";
 import RegisForm from "../../components/users/user-regis.form";
 
 function RegisPage() {

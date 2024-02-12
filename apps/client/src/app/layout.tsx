@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
-import ClientProgress from "../components/client.progress";
+import ClientProgress from "../components/commons/client-progress";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

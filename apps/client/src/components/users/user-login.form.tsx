@@ -1,14 +1,14 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import userService from "../../services/user.service";
-import { toast } from "react-toastify";
-import { Eye, EyeOff } from "lucide-react";
 
 const loginSchema = yup.object({
   email: yup

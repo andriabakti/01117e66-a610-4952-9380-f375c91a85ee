@@ -57,10 +57,10 @@ export default function LinkList({
 
   return (
     <div className="container mb-20 ">
-      <div className="mt-10 h-auto overflow-x-auto rounded-lg bg-white">
-        <div className="w-full bg-blue-500 py-5 text-center text-xl font-bold text-white">
-          List of Shortened Link
-        </div>
+      <div className="mt-10  rounded-t-lg bg-blue-500 py-5 text-center text-xl font-bold text-white">
+        List of Shortened Link
+      </div>
+      <div className="h-auto overflow-x-auto rounded-b-lg bg-white">
         <table className="table">
           <thead>
             <tr>
@@ -119,34 +119,36 @@ export default function LinkList({
           )}
         </table>
       </div>
-      {isLogin && (
+      {isLogin && listCount !== 0 && (
         <div className="flex items-center justify-between rounded-b-lg bg-white p-5 ">
           <div className="font-bold text-blue-500">
             Showing {page.startIndex} to {page.lastIndex} of {listCount}
           </div>
-          <div>
-            <div className="join">
-              <button
-                className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
-                onClick={() => changePageDown()}
-                disabled={page.current === 1}
-              >
-                {"<"}
-              </button>
-              <button className="btn join-item  bg-gray-200 text-blue-700 hover:cursor-default hover:bg-gray-200 ">
-                Page {page.current}
-              </button>
-              <button
-                className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
-                onClick={() => changePageUp()}
-                disabled={
-                  page.current === page.lastPage || page.current === null
-                }
-              >
-                {">"}
-              </button>
+          {listCount > 5 && (
+            <div>
+              <div className="join">
+                <button
+                  className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
+                  onClick={() => changePageDown()}
+                  disabled={page.current === 1}
+                >
+                  {"<"}
+                </button>
+                <button className="btn join-item  bg-gray-200 text-blue-700 hover:cursor-default hover:bg-gray-200 ">
+                  Page {page.current}
+                </button>
+                <button
+                  className="btn join-item bg-gray-200 text-xl font-bold text-blue-700 hover:bg-blue-500 hover:text-white"
+                  onClick={() => changePageUp()}
+                  disabled={
+                    page.current === page.lastPage || page.current === null
+                  }
+                >
+                  {">"}
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

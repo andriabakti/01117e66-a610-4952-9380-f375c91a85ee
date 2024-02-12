@@ -34,7 +34,7 @@ export default function LogoutModal({
   };
 
   const confirmLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     return setLogin(false);
   };
 

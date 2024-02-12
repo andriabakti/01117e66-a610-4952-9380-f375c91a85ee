@@ -1,4 +1,4 @@
-import { DatabaseService } from '@/server/configs/database/database.service';
+import { DatabaseService } from '@/configs/database/database.service';
 import {
   BadRequestException,
   Injectable,

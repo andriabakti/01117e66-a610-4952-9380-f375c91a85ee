@@ -1,4 +1,4 @@
-import { ILinkModel } from '@/server/modules/links/interfaces/link-model.interface';
+import { ILinkModel } from '@/modules/links/interfaces/link-model.interface';
 
 export interface IUserModel {
   readonly id?: string;

@@ -1,5 +1,5 @@
-import { UserData } from '@/server/commons/decorators/user-data.decorator';
-import { IntParserPipe } from '@/server/commons/pipes/int-parser.pipe';
+import { UserData } from '@/commons/decorators/user-data.decorator';
+import { IntParserPipe } from '@/commons/pipes/int-parser.pipe';
 import {
   BadRequestException,
   Body,

@@ -1,5 +1,5 @@
-import { DatabaseService } from '@/server/configs/database/database.service';
-import { RedisService } from '@/server/configs/redis/redis.service';
+import { DatabaseService } from '@/configs/database/database.service';
+import { RedisService } from '@/configs/redis/redis.service';
 import {
   Injectable,
   InternalServerErrorException,
@@ -157,7 +157,7 @@ export class LinkService {
     return {
       links,
       totalLink: total._count.userId,
-      totalVisit: total._sum.visitCount,
+      totalVisit: total._sum.visitCount ? total._sum.visitCount : 0,
     };
   }
 }

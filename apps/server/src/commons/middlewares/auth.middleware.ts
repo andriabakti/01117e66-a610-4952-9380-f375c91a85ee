@@ -1,4 +1,4 @@
-import { UserService } from '@/server/modules/users/user.service';
+import { UserService } from '@/modules/users/user.service';
 import {
   Injectable,
   NestMiddleware,

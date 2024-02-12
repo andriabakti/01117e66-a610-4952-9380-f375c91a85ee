@@ -1,14 +1,14 @@
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { redisStore } from 'cache-manager-redis-yet';
+import type { RedisClientOptions } from 'redis';
 import { RedisService } from './redis.service';
 
 @Module({
   imports: [
-    CacheModule.register({
+    CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORRT,
+      url: process.env.REDIS_URL,
       ttl: 0,
     }),
   ],

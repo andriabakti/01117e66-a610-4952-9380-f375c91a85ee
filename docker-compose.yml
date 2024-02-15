@@ -26,6 +26,12 @@ services:
     depends_on:
       - postgres
       - redis
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm run migrate:start
+        npm run start:prod
     networks:
       - andria-networks
 

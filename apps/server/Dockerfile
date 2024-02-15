@@ -9,5 +9,3 @@ COPY . .
 RUN pnpm install --silent
 
 RUN pnpm run build
-
-CMD /app/backend/run.sh
